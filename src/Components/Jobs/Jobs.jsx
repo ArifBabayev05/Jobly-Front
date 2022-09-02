@@ -78,7 +78,7 @@ function Jobs() {
         
         return product;
       }
-      else if (product.companyName.toLowerCase().includes(query.toLowerCase())) {
+      else if (product.company.name.toLowerCase().includes(query.toLowerCase())) {
         
         return product;
       }
@@ -89,12 +89,6 @@ function Jobs() {
     </div>
    ).reverse();
    }
-
-
-  
-
-
-   
 
   return (
     <div>
