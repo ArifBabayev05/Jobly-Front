@@ -30,7 +30,7 @@
 }
 .h2 .homepage_search {
   position: relative;
-  width: 80%;
+  width: 75%;
 }
 .h2 .homepage_search a input {
   position: relative;
@@ -40,13 +40,12 @@
   margin-top: 48px;
   border-radius: 76px;
   padding: 20px 32px;
-  background-color: #EDF3FA;
+  background: rgb(213, 203, 255);
   border: none;
   outline: none;
   cursor: pointer;
   font-size: 20px;
-  font-weight: 300;
-  color: black;
+  font-weight: 400;
 }
 .h2 .homepage_search .search__submit {
   position: absolute;
@@ -55,14 +54,22 @@
   width: 48px;
   height: 48px;
   border-radius: 48px;
-  background-color: #785BF4;
+  background-color: #6441ff;
   border: none;
 }
 .h2 .homepage_search .search__submit img {
-  width: 30px;
+  width: 50px;
   position: absolute;
-  margin-top: 5px;
   justify-content: center;
   position: relative;
-  right: -9px;
+  right: 2px;
+}
+.h2 .homepage_search ::-moz-placeholder {
+  color: rgb(47, 47, 47);
+}
+.h2 .homepage_search :-ms-input-placeholder {
+  color: rgb(47, 47, 47);
+}
+.h2 .homepage_search ::placeholder {
+  color: rgb(47, 47, 47);
 }/*# sourceMappingURL=Hero.css.map */

@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../../Assets/Styles/MainPage/Hero/Hero.css'
 import logo from '../../../Assets/Images/Hero/Hero.png'
-import search from '../../../Assets/Images/Logo/search.svg'
+import search from '../../../Assets/Images/Hero/arroww.png'
 
 
 function Index() {
@@ -20,6 +20,7 @@ function Index() {
                 <label htmlFor='search'></label>
                 <a href='/job'>
                 <input disabled className='search'  placeholder='İş Axtarırsan? Elə indi başla!'/>
+                
                 </a>
 
                 <a  href='/job'  className='search__submit' type='submit'>
