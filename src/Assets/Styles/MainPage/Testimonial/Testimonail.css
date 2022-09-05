@@ -11,4 +11,8 @@
   margin-top: 80px;
   text-decoration: none;
   font-weight: 600;
+  color: black;
+}
+.info a:hover {
+  color: var(--pink);
 }/*# sourceMappingURL=Testimonail.css.map */

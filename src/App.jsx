@@ -3,6 +3,8 @@ import Home from './Pages/Home'
 import About from './Pages/About'
 import Job from "./Pages/Jobs";
 import JobList from './Pages/JobList'
+import Post from './Pages/PostJob'
+
 import Header from './Layouts/Header/Index'
 
 import {Footer} from './Layouts/Footer/Index'
@@ -24,6 +26,8 @@ function App() {
           <Route path='about' element={<About/>}/>
           <Route path='job/:id' element={<Job/>}/>
           <Route path='job' element={<JobList/>}/>
+          <Route path='postjob' element={<Post/>}/>
+
           
         </Routes>
       </BrowserRouter>

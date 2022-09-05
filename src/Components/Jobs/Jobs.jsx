@@ -74,11 +74,11 @@ function Jobs() {
     products.data.filter(product=>{
       if (query === "") {
         return product;
-      } else if (product.name.toLowerCase().includes(query.toLowerCase())) {
+      } else if(product.name.toLowerCase().includes(query.toLowerCase())) {
         
         return product;
       }
-      else if (product.company.name.toLowerCase().includes(query.toLowerCase())) {
+      else  if(product.company.name.toLowerCase().includes(query.toLowerCase())) {
         
         return product;
       }
