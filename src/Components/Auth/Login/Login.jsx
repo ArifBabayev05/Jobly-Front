@@ -6,6 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../Firebase/config'
 import Loader from '../../Jobs/Loader'
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+
 
 
 
@@ -13,8 +15,22 @@ function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
-
     const navigate = useNavigate();
+
+    const provider = new GoogleAuthProvider();
+    const signInWithGoogle = () => {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const user = result.user;
+                toast.success("Qeydiyyat Uğurludur!")
+                navigate("/")
+            }).catch((error) => {
+                toast.error(error.message)
+               
+               
+            });
+
+    }
     const loginUser = (e) => {
         e.preventDefault();
         setLoading(true);
@@ -44,8 +60,8 @@ function Login() {
                         <input type='text' className='m-2' placeholder='Şifrəni daxil edin.'
                             required value={password} onChange={(e) => setPassword(e.target.value)} />
                     </div>
-                    {loading && <Loader/>}
-                    <button className='btn btn-primary'>Daxil Olun</button>
+                    {loading && <Loader />}
+                    <button  className='btn btn-primary'>Daxil Olun</button>
                     <div className='links'>
                         <Link to='/reset'>
                             Şifrəni Yenilə
@@ -54,7 +70,7 @@ function Login() {
                     <p>-- və ya --</p>
                 </form>
                 <ToastContainer />
-                <button type='submit' className='btn btn-danger'> Google ilə Daxil Olun</button>
+                <button type='submit' onClick={signInWithGoogle} className='btn btn-danger'> Google ilə Daxil Olun</button>
                 <p>
                     Hesabınız Yoxdur?
                     <Link to='/register'>Qeydiyyatdan Keçin</Link>
