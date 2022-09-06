@@ -8,6 +8,7 @@ import { auth } from '../Firebase/config'
 import Loader from '../../Jobs/Loader'
 
 
+
 function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -19,11 +20,10 @@ function Login() {
         setLoading(true);
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
+                toast.success("Uğurla Tamamlandı!");
                 const user = userCredential.user;
                 console.log(user);
                 setLoading(false);
-                toast.success("Uğurla Tamamlandı!");
-
                 navigate("/")
 
             })

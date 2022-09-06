@@ -7,8 +7,11 @@ import Post from './Pages/PostJob'
 import Login from './Pages/Login'
 import Register from './Pages/Register'
 import Reset from './Pages/Reset'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from './Layouts/Header/Index'
+// import Header from './Layouts/Header/Header'
+
 import {Footer} from './Layouts/Footer/Index'
 import {
   BrowserRouter,
@@ -21,8 +24,9 @@ function App() {
   return (
     <div className="App">
       
-      <Header/>
+      <ToastContainer/>
       <BrowserRouter>
+      <Header/>
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='about' element={<About/>}/>
@@ -35,8 +39,8 @@ function App() {
 
           
         </Routes>
-      </BrowserRouter>
       <Footer/>
+      </BrowserRouter>
     </div>
   );
 }

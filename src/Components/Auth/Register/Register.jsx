@@ -12,7 +12,7 @@ function Register() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [cPassword, setCPassword] = useState("")
-  const navigate = useNavigate(email)
+  const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
  const registerUser = (e) => { 
   e.preventDefault();
@@ -26,10 +26,10 @@ function Register() {
 
   createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
+    toast.success("Qeydiyyat Uğurludur!")
     const user = userCredential.user;
     setLoading(false);
     console.log(user);
-    toast.success("Qeydiyyat Uğurludur!")
     navigate('/login')
     
   })

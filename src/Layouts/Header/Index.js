@@ -1,12 +1,25 @@
 import React from 'react'
 import '../../Assets/Styles/Layout/Header.css'
 import logo from '../../Assets/Images/Logo/1.png'
+import { getAuth, signOut } from "firebase/auth";
+import {auth} from '../../Components/Auth/Firebase/config'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-
-
-
+import { Link, NavLink, useNavigate } from "react-router-dom";
 function Index() {
 
+
+  const navigate = useNavigate();
+  const logoutUser = () => {
+    signOut(auth).then(() => {
+      toast.success("Hesabdan çıxış uğurla tamamlandı!");
+      navigate('/')
+      console.log("sa");
+    }).catch((error) => {
+      toast.error(error.message)
+    });
+  }
 
   return (
     <div className=''>
@@ -24,7 +37,10 @@ function Index() {
             </div>
 
             <div>
-              <a href='/login'>Daxil Olun</a>
+              <Link to='/login'>Daxil Olun</Link>
+              <NavLink className='ms-1' onClick={logoutUser} to='/'>Çıxış</NavLink>
+              <ToastContainer/>
+
             </div>
           </form>
         </div>
