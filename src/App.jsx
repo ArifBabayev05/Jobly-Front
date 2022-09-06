@@ -4,9 +4,11 @@ import About from './Pages/About'
 import Job from "./Pages/Jobs";
 import JobList from './Pages/JobList'
 import Post from './Pages/PostJob'
+import Login from './Pages/Login'
+import Register from './Pages/Register'
+import Reset from './Pages/Reset'
 
 import Header from './Layouts/Header/Index'
-
 import {Footer} from './Layouts/Footer/Index'
 import {
   BrowserRouter,
@@ -27,6 +29,9 @@ function App() {
           <Route path='job/:id' element={<Job/>}/>
           <Route path='job' element={<JobList/>}/>
           <Route path='postjob' element={<Post/>}/>
+          <Route path='login' element={<Login/>}/>
+          <Route path='register' element={<Register/>}/>
+          <Route path='reset' element={<Reset/>}/>
 
           
         </Routes>
