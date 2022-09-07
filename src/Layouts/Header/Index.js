@@ -1,14 +1,14 @@
 import React, { useEffect, useState, } from 'react'
 import '../../Assets/Styles/Layout/Header.css'
 import logo from '../../Assets/Images/Logo/1.png'
-import {  signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import { auth } from '../../Components/Auth/Firebase/config'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
-import {useDispatch} from 'react-redux'
-import { SET_ACTIVE_USER } from '../../Redux/Slice/authSlice';
+import { useDispatch } from 'react-redux'
+import { SET_ACTIVE_USER, REMOVE_ACTIVE_USER } from '../../Redux/Slice/authSlice';
 
 function Index() {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ function Index() {
     signOut(auth).then(() => {
       toast.success("Hesabdan çıxış uğurla tamamlandı!");
       navigate('/')
-      
+
     }).catch((error) => {
       toast.error(error.message)
     });
@@ -31,25 +31,26 @@ function Index() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // const uid = user.uid;
-        if(user.displayName == null){
-          const u1 = user.email.substring(0,user.email.indexOf("@"));
-          const uName  = u1.charAt(0).toUpperCase() + u1.slice(1);
+        if (user.displayName == null) {
+          const u1 = user.email.substring(0, user.email.indexOf("@"));
+          const uName = u1.charAt(0).toUpperCase() + u1.slice(1);
           console.log(uName);
           setDisplayName(uName);
 
-        }else{
+        } else {
           setDisplayName(user.displayName)
         }
         dispatch(SET_ACTIVE_USER({
-          email:user.email,
+          email: user.email,
           userName: user.displayName ? user.displayName : displayname,
           userId: user.uid,
         }))
       } else {
         setDisplayName("")
+        dispatch(REMOVE_ACTIVE_USER())
       };
     })
-  }, []);
+  }, [dispatch,displayname]);
 
   return (
     <div className=''>
@@ -62,7 +63,7 @@ function Index() {
           <form className="d-flex">
             <div className='d-flex search mx-4'>
 
-              
+
               <a href='/#' className='fw-600'>Salam {displayname}</a>
             </div>
 
