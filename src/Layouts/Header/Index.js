@@ -9,6 +9,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from 'react-redux'
 import { SET_ACTIVE_USER, REMOVE_ACTIVE_USER } from '../../Redux/Slice/authSlice';
+import { ShowOnLogin, ShowOnLogout } from '../HiddenLinks/HiddenLinks';
 
 function Index() {
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ function Index() {
         dispatch(REMOVE_ACTIVE_USER())
       };
     })
-  }, [dispatch,displayname]);
+  }, [dispatch, displayname]);
 
   return (
     <div className=''>
@@ -63,8 +64,9 @@ function Index() {
           <form className="d-flex">
             <div className='d-flex search mx-4'>
 
-
-              <a href='/#' className='fw-600'>Salam {displayname}</a>
+              <ShowOnLogin>
+                <a href='/#' className='fw-600'>Salam {displayname}</a>
+              </ShowOnLogin>
             </div>
 
             <div className='d-flex search mx-4'>
@@ -74,8 +76,12 @@ function Index() {
             </div>
 
             <div>
-              <Link to='/login'>Daxil Olun</Link>
-              <NavLink className='ms-1' onClick={logoutUser} to='/'>Çıxış</NavLink>
+              <ShowOnLogout>
+                <Link to='/login'>Daxil Olun</Link>
+              </ShowOnLogout>
+              <ShowOnLogin>
+                <NavLink className='ms-1' onClick={logoutUser} to='/'>Çıxış</NavLink>
+              </ShowOnLogin>
               <ToastContainer />
 
             </div>
