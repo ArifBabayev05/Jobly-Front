@@ -1,25 +1,47 @@
-import React from 'react'
+import React, { useEffect, useState, } from 'react'
 import '../../Assets/Styles/Layout/Header.css'
 import logo from '../../Assets/Images/Logo/1.png'
-import { getAuth, signOut } from "firebase/auth";
-import {auth} from '../../Components/Auth/Firebase/config'
+import {  signOut } from "firebase/auth";
+import { auth } from '../../Components/Auth/Firebase/config'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import {useDispatch} from 'react-redux'
+import { SET_ACTIVE_USER } from '../../Redux/Slice/authSlice';
+
 function Index() {
-
-
   const navigate = useNavigate();
+  const [menu, setMenu] = useState(false);
+  const [displayname, setDisplayName] = useState("");
+  const dispatch = useDispatch()
+
   const logoutUser = () => {
     signOut(auth).then(() => {
       toast.success("Hesabdan çıxış uğurla tamamlandı!");
       navigate('/')
-      console.log("sa");
+      
     }).catch((error) => {
       toast.error(error.message)
     });
+
+
   }
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        setDisplayName(user.displayName)
+        dispatch(SET_ACTIVE_USER({
+          email:user.email,
+          userName: user.displayName,
+          userId: user.uid,
+        }))
+      } else {
+        setDisplayName("")
+      };
+    })
+  }, []);
 
   return (
     <div className=''>
@@ -32,6 +54,12 @@ function Index() {
           <form className="d-flex">
             <div className='d-flex search mx-4'>
 
+              
+              <a href='/#' className='fw-600'>Salam {displayname}</a>
+            </div>
+
+            <div className='d-flex search mx-4'>
+
               <i className="fa-solid mt-1 me-2 fa-magnifying-glass"></i>
               <a href='/job' className='fw-600'>İş Axtarın</a>
             </div>
@@ -39,7 +67,7 @@ function Index() {
             <div>
               <Link to='/login'>Daxil Olun</Link>
               <NavLink className='ms-1' onClick={logoutUser} to='/'>Çıxış</NavLink>
-              <ToastContainer/>
+              <ToastContainer />
 
             </div>
           </form>
@@ -49,6 +77,7 @@ function Index() {
     </div>
   );
 }
+
 
 export default Index
 
