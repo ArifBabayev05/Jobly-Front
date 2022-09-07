@@ -30,11 +30,19 @@ function Index() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const uid = user.uid;
-        setDisplayName(user.displayName)
+        // const uid = user.uid;
+        if(user.displayName == null){
+          const u1 = user.email.substring(0,user.email.indexOf("@"));
+          const uName  = u1.charAt(0).toUpperCase() + u1.slice(1);
+          console.log(uName);
+          setDisplayName(uName);
+
+        }else{
+          setDisplayName(user.displayName)
+        }
         dispatch(SET_ACTIVE_USER({
           email:user.email,
-          userName: user.displayName,
+          userName: user.displayName ? user.displayName : displayname,
           userId: user.uid,
         }))
       } else {
